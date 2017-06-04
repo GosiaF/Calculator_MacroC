@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<h3 align="center"> Bilans kalorii i składników makro w Twoim posiłku:</h3>
+    <br><br>
+    <div>
+    <table class="table table-hover">
+    <tr>
+        <th>Kalorie</th>
+        <th>Tłuszcze</th>
+        <th>Węglowodany</th>
+        <th>Białko</th>
+    </tr>
+        <td>{{ totalKcal }} kcal</td>
+        <td>{{ totalFat }} g</td>
+        <td>{{ totalCarbohydrates }} g</td>
+        <td>{{ totalProtein }} g</td>
+
+    </table>
+    </div>
+<div>
+    <br><br>
+<div>
+    <a href="{{ path('compose_meal') }}" class="btn btn-primary btn-lg btn btn-info" role="button">Skomponuj nowy posiłek</a>
+</div>
+<br>
+    <div>
+   <a href="{{ path('fos_user_security_logout') }}" class="btn btn-primary btn-lg " role="button">WYLOGUJ</a>
+    </div>
+</div>
+
+{% endblock body %}

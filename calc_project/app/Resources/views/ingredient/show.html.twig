@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Ingredient</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ ingredient.id }}</td>
+            </tr>
+            <tr>
+                <th>Name</th>
+                <td>{{ ingredient.name }}</td>
+            </tr>
+            <tr>
+                <th>Kcal</th>
+                <td>{{ ingredient.kcal }}</td>
+            </tr>
+            <tr>
+                <th>Fat</th>
+                <td>{{ ingredient.fat }}</td>
+            </tr>
+            <tr>
+                <th>Carbohydrates</th>
+                <td>{{ ingredient.carbohydrates }}</td>
+            </tr>
+            <tr>
+                <th>Protein</th>
+                <td>{{ ingredient.protein }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('ingredient_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('ingredient_edit', { 'id': ingredient.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

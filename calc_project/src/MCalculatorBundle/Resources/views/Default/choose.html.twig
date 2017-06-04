@@ -1,0 +1,80 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <form action="{{ path('compose_meal') }}" method="post">
+        <div class="form-group">
+            <label for="sel1">Wybierz składnik:</label>
+            <select class="form-control" id="sel1" name="selectedIngredientId">
+
+                {% for ingredient in ingredients %}
+
+                    <option value="{{ ingredient.id }}">{{ ingredient.name }}</option>
+
+                {% endfor %}
+
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="usr">Waga produktu:</label>
+            <input type="text" class="form-control" name="selectWeight" placeholder="Waga produktu w gramach">
+        </div>
+<br>
+        <div >
+        <button type="submit" class="btn btn-default center-block btn btn-info btn-lg" name="submit" value="add">Dodaj kolejny składnik</button>
+            <br>
+        <button type="submit" class="btn btn-default center-block btn btn-success btn-lg" name="submit" value="done">Posiłek gotowy - podlicz</button>
+        </div>
+        {% for ingredient in ingredientsArr %}
+            <input type="hidden" name="historicalIngredients[]" value="{{ ingredient.id }}">
+        {% endfor %}
+
+
+        {% for weight in weightArr %}
+            <input type="hidden" name="historicalWeight[]" value="{{ weight }}">
+        {% endfor %}
+    </form>
+    <br><br>
+
+<div>
+    <h3>Lista wybranych składników: </h3>
+
+</div>
+<br>
+    <div>
+    <table class="table table-hover">
+        <tr>
+            <th>Składnik</th>
+            <th>Kalorie</th>
+            <th>Tłuszcze</th>
+            <th>Węglowodany</th>
+            <th>Białko</th>
+        </tr>
+
+
+{% set i=0 %}
+{#{% set totalKcal=0 %}#}
+
+        {% for ingredient in ingredientsArr %}
+
+            <tr>
+                <td>{{ ingredient.name }}</td>
+                <td>{{ ingredient.kcal * weightArr[i] / 100}} kcal</td>
+                <td>{{ ingredient.fat * weightArr[i] / 100}} g</td>
+                <td>{{ ingredient.carbohydrates * weightArr[i] / 100}} g</td>
+                <td>{{ ingredient.protein * weightArr[i] / 100}} g</td>
+            </tr>
+
+
+            {#{% set totalKcal = totalKcal + ingredient.kcal * weightArr[i] / 100 %}#}
+
+
+            {% set i=i+1 %}
+
+        {% endfor %}
+
+    </table>
+</div>
+
+{% endblock body %}
